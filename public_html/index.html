@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TheRealSamChaney.com</title>
+    <link rel="icon"  type="image/x-icon" href="/images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,700;1,100;1,200;1,400;1,700&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="style.css" >
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav">
+            <div class="left">
+                <div class="nav-link">
+                    <a href="index.html">home</a>
+                </div>
+                <div class="nav-link">
+                    <a href="about.html">about</a>
+                </div>
+                <div class="nav-link">
+                    <a href="contact.html">contact</a>
+                </div>
+
+            </div>
+            <div class="right">
+                <div class="brand">
+                    <div>sam chaney</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!--#echo var="DATE_LOCAL" --> 
+
+            <div class="portfolio-items">
+
+                <a href="bebop.html">
+                    <div class="portfolio-item">
+                        <div class="portfolio-background" style="background-image:url(images/aijazz.jpg)">
+                        </div>
+                        
+                        <div class="portfolio-content">
+                            <div class="portfolio-logo">
+                                <!-- <img src="images/bebopIcon.png"> -->
+                                Bebop.js
+                            </div>
+                            <div class="portfolio-subtitle">
+                                JavaScript jazz generator
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="tollingaudit.html">
+
+                    <div class="portfolio-item">
+                        
+                        <div class="portfolio-background" style="background-image:url(images/aitollpoint.jpg)">
+                        </div>
+                        
+                        <div class="portfolio-content">
+                            <div class="portfolio-logo">
+                                Tolling Video Player
+                            </div>
+                            <div class="portfolio-subtitle">
+                                .NET video player for auditing tolling systems
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="tollingreport.html">
+                    <div class="portfolio-item">
+                        <div class="portfolio-background" style="background-image:url(images/aireports.jpg)">
+                        </div>
+                        
+                        <div class="portfolio-content">
+                            <div class="portfolio-logo">
+                                Report Generator
+                            </div>
+                            <div class="portfolio-subtitle">
+                                Django web app to automatically generate customer reports 
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="tollingdevice.html">
+                    <div class="portfolio-item">
+                        <div class="portfolio-background" style="background-image:url(images/aihospital.jpg)">
+                        </div>
+                        
+                        <div class="portfolio-content">
+                            <div class="portfolio-logo">
+                                System Health Checker
+                            </div>
+                            <div class="portfolio-subtitle">
+                                Python app to check health of hundreds of devices in a snap
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+<script>
+    const portfolioItems = document.querySelectorAll('.portfolio-item'); 
+
+    portfolioItems.forEach(portfoioItem => {
+        portfoioItem.addEventListener('mouseover', () =>{portfoioItem.childNodes[1].classList.add('img-darken');})
+        portfoioItem.addEventListener('mouseout', () =>{portfoioItem.childNodes[1].classList.remove('img-darken');})
+    })
+</script>
+
+</html>

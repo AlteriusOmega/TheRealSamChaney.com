@@ -1,0 +1,239 @@
+:root {
+    --background-color: darkslategray;
+    --main-color: paleturquoise;
+    --accent-color: mediumslateblue;
+    --accent-opposite: gold;
+    --nav-font-size: 1.4em;
+    --main-font-size: 1.1em;
+    --transition-time: .8s;
+    --margin: 10px;
+    --margin-body: 20px;
+    --logo-font-size: xxx-large;
+    --subtitle-font-weight: 600;
+    --button-background-color: dimgray;
+    --button-hover-color: darkslategray
+}
+
+/****** Main Styles ******/
+
+body {
+    margin:var(--margin-body);
+    margin-top: 0px;
+    background-color :var(--background-color);
+    color: var(--main-color);
+    font-family: 'Montserrat', Helvetica, sans-serif;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr; /* fractional unit */
+}
+
+.content {
+    font-size: var(--main-font-size); 
+}
+
+p { 
+    font-size: var(--main-font-size);
+    text-indent: 2em;
+}
+
+a {
+    color: var(--main-color);
+    transition: color var(--transition-time);
+}
+
+a:hover {
+    color: var(--accent-color);
+}
+
+.note {
+    font-size: .9em !important;
+}
+
+/****** Nav Styles ******/
+
+.left {
+    display: flex;
+}
+
+.right {
+    display: flex;
+    font-weight: 300;
+}
+
+.brand {
+    margin-right: var(--margin);
+    /* display: flex; */
+    font-size: var(--nav-font-size);
+}
+
+.nav {
+    display: flex;
+    font-weight: 550;
+    justify-content:space-between;
+    text-transform: capitalize;
+    margin: var(--margin);
+}
+
+.nav > .left > div {
+    margin-right: 20px;
+    font-size: var(--nav-font-size);
+}
+
+.nav-link {
+    height: 22px;
+    border-bottom: 2px solid transparent; /*hidden underline is necessary to stop stuff shifting around or jarring pop-in when visible one appears */
+    transition: border-bottom var(--transition-time);
+    margin-inline: var(--margin);
+    font-size: var(--nav-font-size);
+}
+
+.nav-link:hover { /*this is a psuedo state*/
+    border-bottom: 2px solid var(--accent-color);/*this is the definition of the bottom border once it becomes visible*/
+}
+
+.nav-link a {
+    color: var(--main-color);
+    text-decoration: none;
+    transition: color var(--transition-time)
+}
+
+.nav-link a:hover {
+    color: var(--accent-color);
+}
+
+/****** Portfolio Styles ******/
+.portfolio-items {
+    margin-left: calc(-1 * var(--margin-body));
+    margin-right: calc(-1 * var(--margin-body));
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Add more for more portfolio item columns */
+}
+
+.portfolio-item {
+    position: relative;
+}
+
+.portfolio-background {
+    filter:brightness(.5);
+    height: 500px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.portfolio-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.portfolio-logo { /* This is for text-based logos */
+    font-weight: 700;
+    color: var(--main-color);
+    font-size:var(--logo-font-size);
+}
+
+.portfolio-logo img {
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.portfolio-content .portfolio-subtitle {
+    font-weight: var(--subtitle-font-weight);
+    transition: 1s;
+    font-size:var(--nav-font-size);
+    /* margin: 10rem; */
+    color: transparent;
+}
+
+.portfolio-content:hover .portfolio-subtitle {
+    font-weight: var(--subtitle-font-weight);
+    color: var(--main-color)
+}
+
+.img-darken { /* Use JavaScript to call this on hover events */
+    transition: 1s;
+    filter: brightness(.2);
+}
+
+/***** About Page Styles ****/
+.columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* border: 1px solid rgb(255, 0, 0); */
+    /* padding-right: 60px; */
+    /* column-gap: 50; */
+    padding-right: 200px;
+    padding-left: 0px;
+
+}
+
+.column {
+    display: flex;
+    flex-wrap: wrap; /* this fixes children of column having flex and being in a single row */
+    justify-content: center;
+    align-content: center;
+    /* border: 1px solid black; */
+}
+
+.profile-img img {
+    max-width: 500px; /*% refers to grid*/
+    /* border: 1px solid black; */
+}
+
+.profile-content h1 {
+    color: var(--main-color);
+}
+
+/* Bebop Style */
+
+input[type = "radio"]{
+opacity: 0;
+width: 0;
+margin: 0;
+}
+
+input[type = "radio"]:checked + label.radioLabel{ /*Selected button*/
+    outline-color: var(--accent-color);
+	outline-style: solid;
+	background-color: var(--button-background-color);
+}
+label.radioLabel:hover {
+	background-color: var(--button-hover-color);
+}
+label.radioLabel {
+	outline-color: var(--main-color);
+	outline-style: solid;
+	background-color: var(--button-background-color);
+	box-sizing: border-box;
+	padding:3px;
+	position: relative;
+	line-height: 20px;
+	display: inline-block;
+	margin-top: 15px;
+	transition:1s;
+}
+button {
+	border:none;
+}
+.button:hover {
+	background-color: var(--button-hover-color);
+}
+.button {
+	outline-color: var();
+	outline-style: solid;
+	background-color: var(--button-background-color);
+	color:var(--main-color);
+	box-sizing: border-box;
+	padding:3px;
+	position: relative;
+	line-height: 20px;
+	display: inline-block;
+	margin-top: 15px;
+	transition: 1s;
+}

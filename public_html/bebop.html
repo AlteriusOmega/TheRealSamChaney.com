@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<HTML>
+
+<head>
+	<title>TheRealSamChaney.com</title>
+	<link rel="icon"  type="image/x-icon" href="/images/favicon.ico">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,700;1,100;1,200;1,400;1,700&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="style.css" >
+</head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<body>
+    <div class="container">
+        <div class="nav">
+            <div class="left">
+                <div class="nav-link">
+                    <a href="index.html">home</a>
+                </div>
+                <div class="nav-link">
+                    <a href="about.html">about</a>
+                </div>
+                <div class="nav-link">
+                    <a href="contact.html">contact</a>
+                </div>
+
+            </div>
+            <div class="right">
+                <div class="brand">
+                    <div>sam chaney</div>
+                </div>
+            </div>
+        </div>
+
+
+	<div class="portfolio-item">
+		<div class="portfolio-background" style="background-image:url(images/aijazz.jpg); height:200px; margin-bottom:20px;">
+		</div>
+		
+		<div class="portfolio-content">
+			<div class="portfolio-logo">
+				<!-- <img src="images/bebopIcon.png"> -->
+				Bebop.js
+			</div>
+			<div class="portfolio-subtitle">
+				JavaScript Jazz Generator
+			</div>
+		</div>
+	</div>
+
+	<!-- <h1>Bebop.js</h1> -->
+
+
+<p>This Javascript application takes in a string input of any chord and generates a jazzy, bebop-style melody using one of multiple common techniques or can even generate a melody based on a random combination of them. It's exremely flexible in the form of input that it can handle. It also plays audio of the generated melody!
+
+Type a jazz chord into the form below, then input the key, select style and direction, and click "Get Bebop!" <br>
+Ex: "EbMaj7" and "D# Major 7th" will both produce the same notes but the first will show the accidentals as flats<br>
+and the second will show them as sharps.<br></p>
+
+	<br><br>
+	<form>
+		<b>Chord:</b> 
+		<input name="bebop  input" type="text" id="bebopIn"> | Ex: Db Major 7th, Emin7, Ab minmaj9, F aug<br><br>
+		<b>Key (Optional):</b>
+		<input name="key input" type="text" id="keyIn">  | Ex: D, A minor, Bb major, G#-<br>
+		<b>Style:</b>
+		<input name="style" type="radio"  id="styleIn0" value="below"> 
+		<label for="styleIn0" class="radioLabel">Approach from below</label>
+		<input name="style" type="radio"  id="styleIn1" value="above">
+		<label for="styleIn1" class="radioLabel">Approach from above</label>
+		<input name="style" type="radio"  id="styleIn2" value="mix">
+		<label for="styleIn2" class="radioLabel">Mix of above and below</label>
+		<input name="style" type="radio"  id="styleIn3" value="surround3">
+		<label for="styleIn3" class="radioLabel">Surround 3</label>
+		<input name="style" type="radio"  id="styleIn4" value="surround4">
+		<label for="styleIn4" class="radioLabel">Surround 4</label><br>
+		<input name="style" type="radio"  id="styleIn5" value="randomMix">
+		<label for="styleIn5" class="radioLabel">RANDOM MIX</label><br>
+		<b>Direction:</b>
+		<input name="direction" type="radio" id="directionInUp" value="up">
+		<label for="directionInUp" class="radioLabel">Up</label> 
+		<input name="direction" type="radio" id="directionInDown" value="down">
+		<label for="directionInDown" class="radioLabel">Down</label>
+		<br><br>
+
+		<button id="runBebop" class="button">Get Bebop!</button><br>
+	</form>
+
+	<h1 id="output">
+	</h1>
+
+	<div class="target">
+		<button id="playNotes" class="button">
+			Play Notes!
+		</button>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+	<script type="text/javascript" src="bebop.js"></script>
+
+</body>
+
+</HTML>
