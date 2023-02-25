@@ -7,12 +7,20 @@ let synth = new Tone.Synth({
     type:'sine'
       },
         envelope : {
-        attack:0.01,
+        attack:0.005,
         decay:0.7,
         sustain:.1,
         release:0.7
       }
-    });
+});
+
+// let filter = new Tone.Filter({
+//   type: 'lowpass',
+//   frequency: 700,
+//   rolloff: -20
+// });
+// synth.connect(filter);
+// filter.toMaster();
 
 const gain = new Tone.Gain(0.9);
 gain.toMaster();
@@ -35,7 +43,7 @@ arrMelody.forEach(function(note, index){
   outNotes.push(note);
 })
 return outNotes;
-}());//IIFE
+}());
 let loopIndex = 0;
 let melodyLength = soundNotes.length;
 let loop = new Tone.Loop(function(time){
@@ -55,14 +63,15 @@ $(".target" ).hide();//Hide play notes button until notes are shown on page foro
 
 // $('button#runBebop').click(function(event){ // dolalr sign $() is short for document.getElementById()
 $('button#runBebop').on('click', function(event){
+      event.preventDefault();
 
-  event.preventDefault();
-let chordFromHtml =  $('input#bebopIn').val() ;
-let keyFromHtml = $('input#keyIn').val();
-let styleFromHtml = $('input[name=style]:checked').val();
-let directionFromHtml = $('input[name=direction]:checked').val();
-console.log('Get Bebop button was clicked!')
-$('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directionFromHtml));
+    let chordFromHtml =  $('input#bebopIn').val() ;
+    let keyFromHtml = $('input#keyIn').val();
+    let styleFromHtml = $('input[name=style]:checked').val();
+    let directionFromHtml = $('input[name=direction]:checked').val();
+    console.log('Get Bebop button was clicked!')
+    $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directionFromHtml));
+  
 } );
 
 
@@ -184,6 +193,7 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
     note = scale[ bindIndex(scale, index) ] + oct*octave;
     return note;
   }
+
   //inverted infinite scale function, basically a .indexOf for values that are out of range of an array
   // function infiniteIndexOf (scale, note){
   //   let octave = getOctave(note);
@@ -197,6 +207,7 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
   //   }
   //   return index;
   // }
+
   function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
   }
@@ -206,6 +217,7 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
   let testGetOctave = getOctave(11);
   let testInfiniteScale = infiniteScale(allScales['major']['notes'], -2);
   let testBindIndex = bindIndex(allScales['major']['notes'], -1);
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// Define object constructors ////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -226,7 +238,7 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
        root = self.chordName[0].toUpperCase()+self.chordName[1];
        }
        return (root);
-       }() );//IIFE
+       }() );
     self.sharpOrFlat = (function (){
     let sharpsOrFlats = 'flats';
       for (let roots in allKeys['sharps']){
@@ -235,7 +247,7 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
             }
           }
          return sharpsOrFlats;
-        }() );//IIFE
+        }() );
     self.intRoot = intNotes[self.sharpOrFlat][self.strRoot];
     self.quality = (function (){
          let quality = 'quality not found!';
@@ -248,7 +260,7 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
                 }
              }
           }
-       }() );//IIFE
+       }() );
     self.tones = (  function (){
       let extensions = 0;
       if( self.chordName.match(/7|9|11|13/) )
@@ -287,7 +299,7 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
            }
          }
          return tones;
-       }() );//IIFE
+       }() );
       }
   
   //Melody object constructor
@@ -311,7 +323,7 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
           root = 'No key';
         }
          return (root);
-         }() );//IIFE
+         }() );
     self.minor = (function(key){
       let isMinor = false;
       if(self.key){
@@ -320,7 +332,7 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
         }
       }
        return isMinor;
-       }(self.key) );//IIFE
+       }(self.key) );
     self.intTonic = (function(){ 
       let tonicOut=0;
       if(self.minor){
@@ -330,7 +342,7 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
         tonicOut = intNotes[self.chord.sharpOrFlat][self.strTonic];
       }
       return tonicOut;
-    }() );//IIFE   
+    }() );   
     self.chordScale = (function(){
       let chordScaleOut = allScales[self.chord.quality['scale']]['notes'];
         if(self.key ){
@@ -346,7 +358,7 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
           }
        }
         return chordScaleOut;
-      }());//IIFE
+      }());
     self.tones = self.chord.tones;
     self.rhythm = rhythm;
     self.duration = duration;
@@ -357,7 +369,7 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
           scaleNotes.push(  self.chordScale[note]+self.chord.intRoot  );
           }
         return scaleNotes;
-      }());//IIFE
+      }());
     self.belowNote = function(tone){
       return (tone-1);
     }
@@ -386,7 +398,7 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
           approachBelowNotes.push(tone);
         });
       return (approachBelowNotes);
-    } ());//IIFE
+    } ());
     
     self.approachAbove = (function(){
       // debugger;
@@ -398,7 +410,7 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
             approachAboveNotes.push(tone);
                          });
       return approachAboveNotes;
-    }() );//IIFE
+    }() );
     self.aboveBelow = (function(){
       //Do mix of diatonic above and chromatic below notes depending on chord
       let aboveBelowNotes = [];
@@ -421,7 +433,7 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
         }
       });
       return aboveBelowNotes;
-    }() );//IIFE
+    }() );
     self.surround3 = (function(){
     	let surround3Notes = [];
     	self.tones.forEach(function(tone, index){
@@ -430,7 +442,7 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
     		surround3Notes.push(tone);
     	});
     		return (surround3Notes);
-    } () );//IIFE
+    } () );
     self.surround4 = (function(){
     	 let surround4Notes = [];
     	self.tones.forEach(function(tone,index){
@@ -446,7 +458,7 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
 		surround4Notes.push(tone); 
     	});
       return (surround4Notes);
-    }());//IIFE
+    }());
     self.randomMix = (function(){
       let randomMixNotes = [];
       self.tones.forEach(function(tone, index){
@@ -488,7 +500,7 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
 
       });
     return randomMixNotes;
-    } () )//IIFE 
+    } () ) 
   }
 
 
@@ -496,21 +508,22 @@ $('h1#output').html(BEBOPOBJ(chordFromHtml, keyFromHtml, styleFromHtml, directio
 //////////////////////////////////////////// Main Function ////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function BEBOPOBJ(CHORD, KEY, STYLE, DIRECTION) {
+  let chordIn = CHORD ? CHORD.toLowerCase().trim() : false;
 
-$('.target').show();//unhide Palay Notes button
 
 ////////////////////////////////////// Handle Bad Input ///////////////////////////////////////////
- let chordIn = CHORD ? CHORD.toLowerCase().trim() : false;
  if(chordIn[0] !='a' & chordIn[0] != 'b' & chordIn[0] != 'c' & chordIn[0] != 'd' &
     chordIn[0] !='e' & chordIn[0] != 'f' & chordIn[0] != 'g'){
   chordIn = false;
 }
  if(chordIn == false ){return('Please input a valid chord!')}
+ else{
+  
+  $('.target').show();
 
   let keyIn = KEY ? KEY.toLowerCase().replace(/ /g, '') : false;
   let styleIn = STYLE ? STYLE : false;
   let directionIn = DIRECTION ? DIRECTION : false;
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////// Use Object Constructors to Generate Output /////////////////////////////
@@ -578,5 +591,7 @@ $('button#playNotes').click(function(event){
 //////////////////////////// Final Return Output //////////////////////////////////
 // debugger;
 return (outNotesSpaces);  
+
+}//end of else
 
 }//end of Main function BEBOPOBJ

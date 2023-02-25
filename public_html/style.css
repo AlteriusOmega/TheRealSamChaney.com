@@ -24,6 +24,11 @@ body {
     font-family: 'Montserrat', Helvetica, sans-serif;
 }
 
+h1 {
+    display: flex;
+    justify-content: center;
+}
+
 .container {
     display: grid;
     grid-template-columns: 1fr; /* fractional unit */
@@ -173,6 +178,14 @@ a:hover {
 
 }
 
+@media (max-width: 2000px) {
+    .columns {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+    }
+    
+}
+
 .column {
     display: flex;
     flex-wrap: wrap; /* this fixes children of column having flex and being in a single row */
@@ -202,6 +215,7 @@ input[type = "radio"]:checked + label.radioLabel{ /*Selected button*/
     outline-color: var(--accent-color);
 	outline-style: solid;
 	background-color: var(--button-background-color);
+
 }
 label.radioLabel:hover {
 	background-color: var(--button-hover-color);
@@ -211,29 +225,37 @@ label.radioLabel {
 	outline-style: solid;
 	background-color: var(--button-background-color);
 	box-sizing: border-box;
-	padding:3px;
+	padding:5px;
+    margin: 7px;
 	position: relative;
 	line-height: 20px;
 	display: inline-block;
 	margin-top: 15px;
 	transition:1s;
 }
-button {
-	border:none;
-}
+
 .button:hover {
 	background-color: var(--button-hover-color);
 }
+
+#runBebop{
+    display: flex;
+    justify-content: center;
+}
+
 .button {
-	outline-color: var();
+    font-size: 1.5em;
+    font-weight: 1000;
+    display: flex !important;
+    justify-content: center !important; 
+    width: 20%;
+    border: 0px;
+	outline-color: var(--main-color);
 	outline-style: solid;
 	background-color: var(--button-background-color);
 	color:var(--main-color);
-	box-sizing: border-box;
 	padding:3px;
-	position: relative;
-	line-height: 20px;
-	display: inline-block;
+	/* line-height: 20px; */
 	margin-top: 15px;
 	transition: 1s;
 }
