@@ -1,0 +1,4 @@
+packages = ["svgwrite"]
+
+[[fetch]]
+files = ["geometry_generator.py"]

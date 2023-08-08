@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TheRealSamChaney.com</title>
+    <link rel="icon"  type="image/x-icon" href="/images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,700;1,100;1,200;1,400;1,700&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="style.css" >
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/releases/2023.03.1/pyscript.js"></script>
+    <!-- <py-script src="./geometry_generator.py"></py-script> -->
+
+</head>
+
+<body>
+    <py-script src="./geometry_interface.py"></py-script>
+    <py-config src="./pyscript_config.toml"></py-config>
+
+    <div class="container">
+        <div class="nav">
+            <div class="left">
+                <div class="nav-link">
+                    <a href="index.html">home</a>
+                </div>
+                <div class="nav-link">
+                    <a href="about.html">about</a>
+                </div>
+                <div class="nav-link">
+                    <a href="contact.html">contact</a>
+                </div>
+
+            </div>
+            <div class="right">
+                <div class="brand">
+                    <div>sam chaney</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="portfolio-item">
+
+                <div class="portfolio-background" style="background-image:url(images/geometry_generator.png); height: 200px; margin-bottom:20px;">
+                </div>
+                
+                <div class="portfolio-content">
+                    <div class="portfolio-logo">
+                        Geometry Generator
+                    </div>
+                    <div class="portfolio-subtitle">
+                        A Powerful Tool For Creating Geometric Pattern SVGs
+                    </div>
+                </div>
+            </div>
+
+            <div id="interface"></div>
+
+            <div class="svg-container">
+                <div id="svg-output" class="svg"></div>
+                <textarea name="text-area" id="geometry-area" cols="30" rows="10"></textarea>
+
+            </div>
+
+            <button id="test-button" py-click="run_geometry()">Test!</button>
+
+            <py-repl id="py-repl"></py-repl>
+
+            <p>I created Geometry Generator because I have always been enamored with the beauty of geometric patterns like in art such as M.C. Escher, like those found on mosques, and like those found in nature like on diatoms. In junior high, geometry class was what initially got me to fall in love with mathematics and science because the visual aspect of it allowed me to connect to the material more deeply. Geometry can act as a sort of bridge 
+            </p>
+
+            <p>I also make laser-engraved and 3D printed crafts and  often find myself needing such geometric patterns to integrate into them, and I found that there was a lack of available patterns online. I had the thought that vector graphics are basically just code dictating where to draw points and lines, and that I could likely write a program to generate beautiful and intriguing designs</p>
+
+            <p>Geometry Generator integrates with SVGWrite which is a Python library which can create SVG files (vector graphics) but it doesn't really have any tools for creating patterns. For this, I created many custom classes to create powerful tools for creating complex designs. 
+            </p>
+
+            <p>The first of these classes and the foundation of the program is the Polygon class. This allows me to create many polygon objects, each with a different shape, and every one keeps track of all of its points and its center. The polygon class also has methods like draw, which draws itself into the actual SVG file, rotate which lets you rotate it to a certain angle, and draw_fractal which is a robust recursive function for making a fractal of the polygon that lets the user define the amount of size change between fractal layers and even an angle change, allowing for twisted fractals!</p>
+
+            <p>The next class is the Grid class which generates the majority of patterns by creating a grid of Polygon objects. Each Grid object has all of the information about the points in the grid, and holds all the polygon objects at each point. It also offers many methods for modifying those polygons like modify_polygons which lets you pass in a callback function to be run on every polygon in the grid. This allows for complex patterns like gradients of polygon size, angle, outline and more </p>
+
+            <p>On top of these two classes, there are more like GridIsometric which inherits from Grid but is an isometric (triangular) grid, and there is also the Mandala class which creates a ring of equidistant points and polygons which can be used to create beautiful radial motifs like you would see in a mandala</p>
+
+            <p>I have many more features planned like an Edge Mandala which creates polygons on all of the edges of a seed polygon then repeats to make intricate expanding lattices like you might see in a mosque, and a Spiral Grid which can create spirals of all kinds including golden and silver spirals</p>
+
+            <!-- <p>Introducing the SVG Geometric Pattern Creator! Unleash your creativity and design captivating geometric patterns effortlessly. This powerful program is your gateway to crafting mesmerizing SVG patterns with precision and ease.</p>
+
+            <p>With the SVG Geometric Pattern Creator, you have the tools to generate stunning patterns that will leave a lasting impression. Whether you're a professional designer, an artist, or simply an enthusiast, this app is tailor-made to meet your needs.</p>
+            <p>Create intricate polygons effortlessly using our intuitive interface. Define the number of points, adjust the radius, and set the center to bring your vision to life. The program utilizes advanced mathematical calculations to ensure precise and symmetrical results every time.</p>
+
+            <p>Unleash your artistic flair with the ability to rotate polygons, giving your patterns dynamic movement and versatility. Experiment with different angles to achieve unique and captivating designs.</p>
+
+            <p>But the creativity doesn't stop there. Our program features the remarkable Grid function, enabling you to arrange your polygons in customizable grids. Define the spacing, number of rows and columns, and even add outlines for an extra touch of elegance.</p>
+
+            <p>Take your designs to the next level with the GridIsometric feature. This intelligent function creates isometric grids effortlessly, perfect for intricate fractal designs. Discover the beauty of symmetry and unlock new artistic possibilities.</p>
+
+            <p>And for those seeking the grandeur of mandala patterns, the SVG Geometric Pattern Creator has you covered. Craft mesmerizing mandalas with ease. Define the radius, symmetry, and polygon shape to produce intricate and harmonious designs that captivate the eye.</p>
+
+            <p>Export your creations in SVG format, making them compatible with various design software. The possibilities are endless - use your patterns for laser cutting, engraving, digital artwork, or even 3D printing.</p>
+
+            <p>Get ready to embark on a journey of geometric exploration. Let the SVG Geometric Pattern Creator be your trusted companion in turning your artistic vision into reality. Unleash the power of mathematics and design patterns that leave a lasting impression. Try it now and unlock your creative potential!
+            </p> -->
+
+        </div>
+
+</body>
+</html>

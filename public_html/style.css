@@ -35,7 +35,7 @@ h1 {
 }
 
 .content {
-    font-size: var(--main-font-size); 
+    font-size: var(--main-font-size);
 }
 
 p { 
@@ -166,6 +166,21 @@ a:hover {
     filter: brightness(.2);
 }
 
+.svg-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+svg{
+    height: auto;
+    margin-top: var(--margin-body);
+    margin-bottom: var(--margin-body);
+
+}
+
 /***** About Page Styles ****/
 .columns {
     display: grid;
@@ -248,7 +263,7 @@ label.radioLabel {
     font-weight: 1000;
     display: flex !important;
     justify-content: center !important; 
-    width: 20%;
+    width: 200px;
     border: 0px;
 	outline-color: var(--main-color);
 	outline-style: solid;
