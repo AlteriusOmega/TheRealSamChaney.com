@@ -55,16 +55,49 @@
             </div>
 
             <div id="interface"></div>
+            <script>
+                function getPolygonSize(){
+                    const polygons = document.querySelectorAll("svg polygon");
+                    polygons.forEach(polygon => {
+                        boundingBox = polygon.getBBox();
+                        console.log(`polygon box x is ${boundingBox.x} and y is ${boundingBox.y} and width is ${boundingBox.width}`);
+                    })
+                }
+            </script>
+
+            <py-script>
+                from js import getPolygonSize
+                getPolygonSize()
+            </py-script>
 
             <div class="svg-container">
-                <div id="svg-output" class="svg"></div>
-                <textarea name="text-area" id="geometry-area" cols="30" rows="10"></textarea>
+                <div id="svg-output"></div>
+                <div id="button-container">
+                    <button onclick="getPolygonSize()">TEST</button>
+                    <button id="clear-drawing" py-click="clear_drawing()">Clear Drawing</button>
+                    <button id="clear-drawing" py-click="render_drawing_html()">Render Drawing</button>
+                </div>
+                <h2>Make a Triangle or other basic polygon!</h2>
+                <py-repl id="py-repl" src="./geometry_interface.py">
+                    #This is a Python terminal! It has access to all the methods from my geometry_generator
+
+                    clear_drawing() # Or you can press the Clear Drawing button
+
+                    # Add a polygon. The input arguments are # of sides, size, and center coordinates,
+                    # which is a list of x y valyes like [30, 50], and drawing which has to be "drawing_global" here
+                    triangle = Polygon(3, diameter, center, drawing_global)
+
+                    # Call the draw method of the polygon to add it to the drawing
+                    triangle.draw()
+
+                    render_drawing_html() # Or you can press the Render Drawing button
+
+                    # Press shift+enter to run the code. You have to run the REPL code before you can render the drawing or it will be empty
+                </py-repl>
+                <!-- <textarea name="text-area" id="geometry-area" cols="30" rows="10"></textarea> -->
+
 
             </div>
-
-            <button id="test-button" py-click="run_geometry()">Test!</button>
-
-            <py-repl id="py-repl"></py-repl>
 
             <p>I created Geometry Generator because I have always been enamored with the beauty of geometric patterns like in art such as M.C. Escher, like those found on mosques, and like those found in nature like on diatoms. In junior high, geometry class was what initially got me to fall in love with mathematics and science because the visual aspect of it allowed me to connect to the material more deeply. Geometry can act as a sort of bridge 
             </p>

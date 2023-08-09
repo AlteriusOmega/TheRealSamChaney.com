@@ -1,0 +1,9 @@
+OK so
+We need to delete the current drawing
+svgwrite seemingly has no methods for clearing or deleing anything from a drawing, so we will just make a new drawing and fill it with the new polygons
+
+The new polygons need to be entered by the user so need to be in the repl or a textarea or something
+
+Making the new drawing needs to be done before adding the new polygons so before running the repl code.  Maybe just make a separate button to clear the drawing_global then the user can clear it whenever they want
+
+Also want to make it easier for the user so we don't want them to have to do stuff like 

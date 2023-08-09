@@ -166,6 +166,8 @@ a:hover {
     filter: brightness(.2);
 }
 
+
+/* Geometry Generator Styles */
 .svg-container{
     display: flex;
     flex-direction: column;
@@ -173,11 +175,21 @@ a:hover {
     align-items: center;
 }
 
+#svg-output{
+    height: 500px;
+    width: 500px;
+}
+
 
 svg{
-    height: auto;
     margin-top: var(--margin-body);
     margin-bottom: var(--margin-body);
+
+}
+
+.ͼm{
+    /* This is the PyScript comment style */
+    color:var(--accent-opposite)
 
 }
 
