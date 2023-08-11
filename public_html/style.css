@@ -29,6 +29,17 @@ h1 {
     justify-content: center;
 }
 
+h2 {
+    margin-left: 70px;
+}
+
+
+h3 {
+    /* margin-left: 20px; */
+    display: flex;
+    justify-content: center;
+}
+
 .container {
     display: grid;
     grid-template-columns: 1fr; /* fractional unit */
@@ -36,6 +47,8 @@ h1 {
 
 .content {
     font-size: var(--main-font-size);
+    margin-left: var(--margin-body);
+    margin-right: var(--margin-body);
 }
 
 p { 
@@ -166,6 +179,42 @@ a:hover {
     filter: brightness(.2);
 }
 
+.centered-image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+}
+
+.two-column-section{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 60px;
+    /* margin-left: 20px;
+    margin-right: 20px; */
+}
+
+.two-column-text{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:start;
+}
+
+.two-column-image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin:  40px; */
+}
+
+.centered h2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
 
 /* Geometry Generator Styles */
 .svg-container{
@@ -176,15 +225,18 @@ a:hover {
 }
 
 #svg-output{
-    height: 500px;
-    width: 500px;
+
 }
 
-
 svg{
-    margin-top: var(--margin-body);
-    margin-bottom: var(--margin-body);
+    /* margin-top: var(--margin-body);
+    margin-bottom: var(--margin-body); */
+}
 
+polygon{
+    fill:none;
+    stroke: var(--accent-opposite);
+    stroke-width: 2px;
 }
 
 .ͼm{
@@ -200,12 +252,12 @@ svg{
     /* border: 1px solid rgb(255, 0, 0); */
     /* padding-right: 60px; */
     /* column-gap: 50; */
-    padding-right: 200px;
+    padding-right: 0px;
     padding-left: 0px;
 
 }
 
-@media (max-width: 2000px) {
+@media (max-width: 200px) {
     .columns {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
@@ -217,7 +269,7 @@ svg{
     display: flex;
     flex-wrap: wrap; /* this fixes children of column having flex and being in a single row */
     justify-content: center;
-    align-content: center;
+    align-content: start;
     /* border: 1px solid black; */
 }
 

@@ -57,12 +57,70 @@
             <div id="interface"></div>
             <script>
                 function getPolygonSize(){
+                    // Check every polygon in the svg element, get its bottom right coordinates via x, y, height and width, and return the array [xMax, yMax]
+                    let [xMin, yMin, xMax, yMax] = [Infinity, Infinity, -Infinity, -Infinity]; // Need to start mins and max at Infinity or -Infinity
                     const polygons = document.querySelectorAll("svg polygon");
                     polygons.forEach(polygon => {
                         boundingBox = polygon.getBBox();
-                        console.log(`polygon box x is ${boundingBox.x} and y is ${boundingBox.y} and width is ${boundingBox.width}`);
-                    })
+                        let [xCurrentMin, yCurrentMin] = [Math.round(boundingBox.x), Math.round(boundingBox.y)];
+                        let xCurrentMax = Math.round(boundingBox.x + boundingBox.width); // Have to add width since x is left side
+                        let yCurrentMax = Math.round(boundingBox.y + boundingBox.height); // Have to add height (downward), since and y is top
+                        console.log(`In getPolygonSize and xCurrentMin is ${xCurrentMin}, yCurrentMin is ${yCurrentMin}, xCurrentMax is ${xCurrentMax}, yCurrentMax is ${yCurrentMax}`);
+                        if (xCurrentMin < xMin) {xMin = xCurrentMin;}
+                        if (yCurrentMin < yMin) {yMin = yCurrentMin;}
+                        if (xCurrentMax > xMax) {xMax = xCurrentMax;}
+                        if (yCurrentMax > yMax) {yMax = yCurrentMax;}
+                        console.log(`polygon bounding box x is ${boundingBox.x}, y is ${boundingBox.y}, width is ${boundingBox.width}, height is ${boundingBox.height}`);
+                    });
+                    const coords = [xMin, yMin, xMax, yMax];
+                    console.log(`in getPolygonSize and about to return ${coords}`)
+                    return coords;
                 }
+
+                function setSVGBoxSize(coords){
+                    const [xMin, yMin, xMax, yMax] = [coords[0], coords[1], coords[2], coords[3]];
+                    const newWidth = xMax - xMin;
+                    <!-- console.log(`In setSVGBoxSize and newWidth is ${newWidth}`); -->
+                    
+                    const newHeight = yMax - yMin;
+                    // Takes in max x and y coordinates array of polygon(s), and sets the width and height of svg element to fit
+                    const svgElement = document.querySelector("#svg-output svg"); // Get SVG element inside the SVG output div
+                    if (svgElement == null ){
+                        console.log("No SVG element found within svg-output!");
+                        return;
+                    } else {
+                        svgElement.setAttribute("width", newWidth); // Set width to max X
+                        svgElement.setAttribute("height", newHeight); // Set height to max y
+                        const svgOutputElement = document.querySelector("#svg-output");
+                        svgOutputElement.setAttribute("width", newWidth);
+                        svgOutputElement.setAttribute("height", newHeight);
+                    }
+                }
+
+                function shiftPolygons(coords){
+                    console.log(`In shiftPolygons at start`);
+                    const [xMin, yMin, xMax, yMax] = [coords[0], coords[1], coords[2], coords[3]];
+                    if (xMin != 0 || yMin != 0){ // If xMin is neg, need to shift to left (add opposite) or if its positive need to shift to right (add opposite)
+                        console.log(`In shiftPolygons and inside if`);
+                        const polygons = document.querySelectorAll("svg polygon");
+                        const polygonGroup = document.createElementNS("http://www.w3.org/2000/svg", "g"); // Make a <g> svg group
+                        const svgElement = document.querySelector("svg"); // TODO, don't assume only 1 svg element
+                        svgElement.append(polygonGroup)
+                        
+                        for (let polygon of polygons){ // Put all the polygons into the new group tag
+                            polygonGroup.appendChild(polygon);
+                        }
+                        // Transform the polygons in the group to shift them into positive coordinates
+                        polygonGroup.setAttribute("transform", `translate(${-xMin} ${-yMin})`);
+                    }
+                }
+
+                function resizeSVG(){
+                    const coords = getPolygonSize();
+                    setSVGBoxSize(coords);
+                    shiftPolygons(coords);
+                }
+
             </script>
 
             <py-script>
@@ -70,32 +128,82 @@
                 getPolygonSize()
             </py-script>
 
+            <h1>Try Out Geometry Generator</h1>
+
             <div class="svg-container">
                 <div id="svg-output"></div>
                 <div id="button-container">
-                    <button onclick="getPolygonSize()">TEST</button>
                     <button id="clear-drawing" py-click="clear_drawing()">Clear Drawing</button>
                     <button id="clear-drawing" py-click="render_drawing_html()">Render Drawing</button>
+                    <button onclick="resizeSVG()">Auto Resize</button>
                 </div>
-                <h2>Make a Triangle or other basic polygon!</h2>
-                <py-repl id="py-repl" src="./geometry_interface.py">
-                    #This is a Python terminal! It has access to all the methods from my geometry_generator
+                <div id="repl-output"></div>
+                <h3>Make a triangle or other basic polygon by clicking in the code box below and pressing shift + enter</h3>
+                <py-repl id="py-repl" src="./geometry_interface.py" output-mode="reset" output="repl-output">
+                    # This is a Python terminal! It has access to all the classes and methods from my geometry_generator
+                    # Press SHIFT + ENTER to run all the code in each box
 
                     clear_drawing() # Or you can press the Clear Drawing button
 
-                    # Add a polygon. The input arguments are # of sides, size, and center coordinates,
-                    # which is a list of x y valyes like [30, 50], and drawing which has to be "drawing_global" here
-                    triangle = Polygon(3, diameter, center, drawing_global)
+                    # Add a polygon
+                    triangle = Polygon(num_points=3, radius=100, drawing=drawing_global) # Try changing the number of points (sides)
 
                     # Call the draw method of the polygon to add it to the drawing
                     triangle.draw()
 
                     render_drawing_html() # Or you can press the Render Drawing button
 
-                    # Press shift+enter to run the code. You have to run the REPL code before you can render the drawing or it will be empty
-                </py-repl>
-                <!-- <textarea name="text-area" id="geometry-area" cols="30" rows="10"></textarea> -->
+                    resizeSVG() # Or you can press the Auto Resize button
 
+                </py-repl>
+
+                <!-- <h3>Make a geometric pattern of polygons!</h3>
+                <py-repl id="py-repl" src="./geometry_interface.py" output-mode="reset" output="repl-output">
+                    clear_drawing()
+
+                    # Add a polygon
+                    hexagon = Polygon(num_points=6, radius=10, drawing=drawing_global) # Try changing the radius
+
+                    # Make an isometric grid of hexagons
+                    hexGrid = GridIsometric(spacing=20, polygon=hexagon, num_x=15, num_y=20, drawing=drawing_global) # Try changing the spacing
+
+                    # Call the draw_polygons method of the grid to add it to the drawing
+                    hexGrid.draw_polygons()
+
+                    render_drawing_html()
+                    resizeSVG()
+                </py-repl> -->
+
+                <h3>Make a geometric grid of polygons with an algorithmic morph</h3>
+                <py-repl id="py-repl" src="./geometry_interface.py" output-mode="reset" output="repl-output">
+                    clear_drawing()
+                    hexagon = Polygon(num_points=6, radius=10, drawing=drawing_global) # Try changing the radius
+                    hexGrid = GridIsometric(spacing=20, polygon=hexagon, num_x=15, num_y=20, drawing=drawing_global) # Try changing the spacing
+
+                    # Use the modify_polygons method with circle_morph function to make the polygons get smaller as you get further from the center 
+                    hexGrid.modify_polygons(circle_morph, magnitude = 0.75, decrease_out = True)
+
+                    # Call the draw_polygons method of the grid to add it to the drawing
+                    hexGrid.draw_polygons()
+
+                    render_drawing_html()
+                    resizeSVG()
+                </py-repl>
+
+                <h3>Make a fractal</h3>
+                <py-repl id="py-repl" src="./geometry_interface.py" output-mode="reset" output="repl-output">
+                    clear_drawing()
+
+                    # Add a polygon
+                    sides = 5  # Try changing the number of sides
+                    pentagon = Polygon(num_points=sides, radius=150, drawing=drawing_global)
+
+                    # Call the draw_fractal method of the polygon to add a fractal of it the drawing
+                    pentagon.draw_fractal(shrinkage=.4, depth=4, rotate=0) # try changing rotate angle, (hint try 360/(2*sides))
+
+                    render_drawing_html()
+                    resizeSVG()
+                </py-repl>
 
             </div>
 
@@ -115,25 +223,9 @@
 
             <p>I have many more features planned like an Edge Mandala which creates polygons on all of the edges of a seed polygon then repeats to make intricate expanding lattices like you might see in a mosque, and a Spiral Grid which can create spirals of all kinds including golden and silver spirals</p>
 
-            <!-- <p>Introducing the SVG Geometric Pattern Creator! Unleash your creativity and design captivating geometric patterns effortlessly. This powerful program is your gateway to crafting mesmerizing SVG patterns with precision and ease.</p>
-
-            <p>With the SVG Geometric Pattern Creator, you have the tools to generate stunning patterns that will leave a lasting impression. Whether you're a professional designer, an artist, or simply an enthusiast, this app is tailor-made to meet your needs.</p>
-            <p>Create intricate polygons effortlessly using our intuitive interface. Define the number of points, adjust the radius, and set the center to bring your vision to life. The program utilizes advanced mathematical calculations to ensure precise and symmetrical results every time.</p>
-
-            <p>Unleash your artistic flair with the ability to rotate polygons, giving your patterns dynamic movement and versatility. Experiment with different angles to achieve unique and captivating designs.</p>
-
-            <p>But the creativity doesn't stop there. Our program features the remarkable Grid function, enabling you to arrange your polygons in customizable grids. Define the spacing, number of rows and columns, and even add outlines for an extra touch of elegance.</p>
-
-            <p>Take your designs to the next level with the GridIsometric feature. This intelligent function creates isometric grids effortlessly, perfect for intricate fractal designs. Discover the beauty of symmetry and unlock new artistic possibilities.</p>
-
-            <p>And for those seeking the grandeur of mandala patterns, the SVG Geometric Pattern Creator has you covered. Craft mesmerizing mandalas with ease. Define the radius, symmetry, and polygon shape to produce intricate and harmonious designs that captivate the eye.</p>
-
-            <p>Export your creations in SVG format, making them compatible with various design software. The possibilities are endless - use your patterns for laser cutting, engraving, digital artwork, or even 3D printing.</p>
-
-            <p>Get ready to embark on a journey of geometric exploration. Let the SVG Geometric Pattern Creator be your trusted companion in turning your artistic vision into reality. Unleash the power of mathematics and design patterns that leave a lasting impression. Try it now and unlock your creative potential!
-            </p> -->
-
         </div>
+        <h2>Output from Python terminals via PyScript</h2>
+    </div>
 
 </body>
 </html>

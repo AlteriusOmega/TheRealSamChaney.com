@@ -45,7 +45,7 @@ class Polygon:
         outline_polygon = Polygon(self.num_points, self.radius + outline_offset, self.center, self.drawing, self.angle)
         self.drawing.add(self.drawing.polygon(outline_polygon.points))
         
-    def draw_fractal(self, shrinkage:float, depth:int,  rotate = False, radius=None, first=True,):
+    def draw_fractal(self, shrinkage:float, depth:int,  rotate=False, radius=None, first=True,):
         # print(f"self.fractal_points is {self.fractal_points}")
         if first: 
             radius = self.radius*shrinkage

@@ -1,6 +1,7 @@
 from geometry_generator import *
 import js
 import svgwrite
+from js import resizeSVG
 
 print(f"geometry_interface.py ran!")
 
@@ -30,3 +31,4 @@ def clear_drawing():
     print(f"clear_drawing ran! and drawing is {drawing_global} and drawing xml is {drawing_global.get_xml()}")
     drawing_global = svgwrite.Drawing(output_path)
     render_drawing_html() # Render the drawing to update the page with empty drawing
+    

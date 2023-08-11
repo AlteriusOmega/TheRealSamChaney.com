@@ -7,3 +7,8 @@ The new polygons need to be entered by the user so need to be in the repl or a t
 Making the new drawing needs to be done before adding the new polygons so before running the repl code.  Maybe just make a separate button to clear the drawing_global then the user can clear it whenever they want
 
 Also want to make it easier for the user so we don't want them to have to do stuff like 
+
+OK so we need to shift all the polygons over at once to fit in the SVG box and adjust the SVG box size
+Size is easy, just get X and Y max and min and difference and use that to set height and width
+
+For shifting polygons, we need the X and Y max and mins also. If the farthest left polygon X min is -10 we need to shift all polygons by +10 but if xMin is +10, we need to shift all polygons by -10 so its always -xMin. 

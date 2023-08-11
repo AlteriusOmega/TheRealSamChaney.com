@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TheRealSamChaney.com</title>
+    <link rel="icon"  type="image/x-icon" href="/images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,700;1,100;1,200;1,400;1,700&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="style.css" >
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav">
+            <div class="left">
+                <div class="nav-link">
+                    <a href="index.html">home</a>
+                </div>
+                <div class="nav-link">
+                    <a href="about.html">about</a>
+                </div>
+                <div class="nav-link">
+                    <a href="contact.html">contact</a>
+                </div>
+
+            </div>
+            <div class="right">
+                <div class="brand">
+                    <div>sam chaney</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="portfolio-item">
+
+                <div class="portfolio-background" style="background-image:url(images/BeatCubeScreenShotPlay.png); height: 200px; margin-bottom:20px;">
+                </div>
+                
+                <div class="portfolio-content">
+                    <div class="portfolio-logo">
+                        BeatCube
+                    </div>
+                    <div class="portfolio-subtitle">
+                        Android Music Making Application
+                    </div>
+                </div>
+            </div>
+
+            <div class="centered">
+                <h2>Overview</h2>
+                <p>
+                    BeatCube is an Android live music making application for beat boxers and finger drummers. Quickly and easily record your own drum sounds (or any sound you want) and assign them to a grid of beautiful buttons, then tap the buttons to make a sick beat, or use it to make a hillarious sound-board or ambient soundscape. You can even customize the number of buttons to your liking and it will keep the sounds you've already recorded assigned to the same number button regardless of grid size. It also incorporates a modern vaporwave aesthetic with smooth gradients and cool tones for a relaxing vibe, take a look!
+                </p>
+
+                <h2>Components</h2>
+                <p>
+                    BeatCube uses Android's activity-centered architecture as well as some other classes to provide shared functionality across all of the different activities
+                </p>
+                <div class="two-column-section">
+                    <div class="two-column-text">
+                        <h2>MainActivity</h2>
+                        <p>
+                            This is the main activity where you record or play the sounds by tapping on the buttons. It uses a robust generateGrid method to dynamically generate the button object grid. This allows the users to customize the button grid to whatever number they want. It overrides the onGlobalLayout method using getViewTreeObserver in order to wait until the UI layout was rendered then calculate and set what the button width and heights should be so they are perfectly sized and evenly-spaced to fill the screen just so. This activity also initializes everything needed in the onCreate method.
+                        </p>
+                    </div>
+                    <div class="two-column-image">
+                        <img src="./images/BeatCubeScreenShotPlay.png" alt="BeatCube play mode" width="300px" />
+                    </div>
+                </div>
+
+                <div class="two-column-section">
+                    <div class="two-column-image">
+                        <img src="./images/BeatCubeScreenShotRecord.png" alt="BeatCube play mode" width="300px" />
+                    </div>
+                    <div class="two-column-text">
+                        <h2>Recorder Class</h2>
+                        <p>
+                            This is the backbone of the application, it's a non-activity utility class that provides functionality for recording and playing audio. I implemented the audio using very low-level classes AudioRecord and AudioTrack. Instead of using common compressed audio files like mp3 files, I implemented buffered file streams of raw PCM audio data. I store the raw PCM audio data in a hash map which is stored in memory so it can be very quickly retrieved and played back for low latency. I also created methods like createWavFile which takes the raw audio stream and generates a permanent WAV file from scratch by writing the header of the file, then using a file stream to write the audio to it. There's also the reverse functionality of loadWavIntoHashMap that takes the permanent WAV files and loads them into the hash map in memory, which allows the app to get all the audio from the file system and get it ready for quick playback.
+                        </p>
+                        <h2>RecordActivity</h2>
+                        <p>The RecordActivity simply provides the UI and implementation for recording the audio samples.</p>
+                    </div>
+                </div>
+
+                <div class="two-column-section">
+                    <div class="two-column-text">
+                        <h2>ChangeGridSize</h2>
+                        <p>
+                            This is the activity where the user changes the button grid size by entering the number of rows and columns they want. It uses a custom theme that makes the activity ac as a dialog or pop up window.
+                        </p>
+
+                        <h2>Custom Toolbar</h2>
+                        <p>
+                            I implemented a custom toolbar to be able to easily add customized icons specific to the application like the grid edit button. The setSupportActionBar is called in the MainActivity to set the custom toolbar as the application's action bar. 
+                        </p>
+
+                        <h2>Utils Class</h2>
+                        <p>
+                            This is a non-activity class to hold commonly used utility functionS like a customized toast text function (Android's way of showing a message to the user).
+                        </p>
+
+                    </div>
+                    <div class="two-column-image">
+                        <img src="./images/BeatCubeScreenShotPlay.png" alt="BeatCube play mode" width="300px" />
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
