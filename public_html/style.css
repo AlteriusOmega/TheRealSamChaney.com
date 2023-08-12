@@ -2,7 +2,7 @@
     --background-color: darkslategray;
     --main-color: paleturquoise;
     --accent-color: mediumslateblue;
-    --accent-opposite: gold;
+    --accent-opposite: rgb(250, 215, 15);
     --nav-font-size: 1.4em;
     --main-font-size: 1.1em;
     --transition-time: .8s;
@@ -236,7 +236,7 @@ svg{
 polygon{
     fill:none;
     stroke: var(--accent-opposite);
-    stroke-width: 2px;
+    stroke-width: 1px;
 }
 
 .ͼm{
